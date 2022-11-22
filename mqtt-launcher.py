@@ -56,14 +56,15 @@ except Exception as e:
     print("Cannot load configuration from file %s: %s" % (CONFIG, str(e)))
     sys.exit(2)
 
-LOGFILE = cf.get('logfile', 'logfile')
+LOGFILE = cf.get('logfile', None)
 LOGFORMAT = '%(asctime)-15s %(message)s'
-DEBUG=True
+DEBUG = True
+LOGLEVEL = logging.DEBUG if DEBUG else logging.INFO
 
-if DEBUG:
-    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG, format=LOGFORMAT)
+if LOGFILE is None:
+    logging.getLogger().setLevel(LOGLEVEL)
 else:
-    logging.basicConfig(filename=LOGFILE, level=logging.INFO, format=LOGFORMAT)
+    logging.basicConfig(filename=LOGFILE, level=LOGLEVEL, format=LOGFORMAT)
 
 logging.info("Starting")
 logging.debug("DEBUG MODE")
