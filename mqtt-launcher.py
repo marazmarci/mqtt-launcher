@@ -71,7 +71,7 @@ logging.debug("DEBUG MODE")
 
 def runprog(topic, param=None):
 
-    publish = "%s/report" % topic
+    # publish = "%s/report" % topic
 
     if param is not None and all(c in string.printable for c in param) == False:
         logging.debug("Param for topic %s is not printable; skipping" % (topic))
@@ -97,8 +97,9 @@ def runprog(topic, param=None):
     except Exception as e:
         res = "*****> %s" % str(e)
 
-    payload = res.rstrip('\n')
-    (res, mid) =  mqttc.publish(publish, payload, qos=qos, retain=False)
+    logging.info(res)
+    #payload = res.rstrip('\n')
+    #(res, mid) =  mqttc.publish(publish, payload, qos=qos, retain=False)
 
 
 def on_message(mosq, userdata, msg):
