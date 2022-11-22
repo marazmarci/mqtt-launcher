@@ -93,7 +93,7 @@ def runprog(topic, param=None):
     logging.debug("Running t=%s: %s" % (topic, cmd))
 
     try:
-        res = subprocess.check_output(cmd, stdin=None, stderr=subprocess.STDOUT, shell=False, universal_newlines=True, cwd='/tmp')
+        res = subprocess.check_output(cmd, stdin=None, stderr=subprocess.STDOUT, shell=False, universal_newlines=True)
     except Exception as e:
         res = "*****> %s" % str(e)
 
